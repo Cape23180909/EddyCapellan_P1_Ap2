@@ -11,12 +11,21 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import edu.ucne.eddycapellan_p1_ap2.ui.theme.EddyCapellan_P1_Ap2Theme
+import edu.ucne.eddycapellan_p1_ap2.data.local.theme.EddyCapellan_P1_Ap2Theme
 
 class MainActivity : ComponentActivity() {
+
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+
+        
+
+
         setContent {
             EddyCapellan_P1_Ap2Theme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->

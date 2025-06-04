@@ -1,4 +1,4 @@
-package edu.ucne.eddycapellan_p1_ap2.ui.theme
+package edu.ucne.eddycapellan_p1_ap2.data.local.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
