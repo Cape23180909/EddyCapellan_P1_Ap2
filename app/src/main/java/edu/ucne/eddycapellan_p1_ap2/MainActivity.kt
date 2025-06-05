@@ -11,46 +11,44 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import androidx.room.Room
+import edu.ucne.eddycapellan_p1_ap2.data.local.database.TareaDb
+import edu.ucne.eddycapellan_p1_ap2.data.local.navegation.TareaNavHost
+import edu.ucne.eddycapellan_p1_ap2.data.local.presentation.TareaListScreen
+import edu.ucne.eddycapellan_p1_ap2.data.local.presentation.TareaViewModel
+import edu.ucne.eddycapellan_p1_ap2.data.local.repository.TareaRepository
 import edu.ucne.eddycapellan_p1_ap2.data.local.theme.EddyCapellan_P1_Ap2Theme
 
 class MainActivity : ComponentActivity() {
 
-
-
+    private lateinit var tareaDb: TareaDb
+    private lateinit var tareasRepository: TareaRepository
+    private lateinit var tareasViewModel: TareaViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
+         tareaDb = Room.databaseBuilder(
+             applicationContext,
+             TareaDb::class.java,
+             "Tarea.db"
+         ).fallbackToDestructiveMigrationFrom()
+             .build()
 
-
-
+        tareasRepository = TareaRepository(tareaDb.TareaDao())
+        tareasViewModel = TareaViewModel(tareasRepository)
 
         setContent {
             EddyCapellan_P1_Ap2Theme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                val navController = rememberNavController()
+                TareaNavHost(
+                    navController = navController,
+                    tareaViewModel = tareasViewModel
+                )
                 }
             }
         }
     }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    EddyCapellan_P1_Ap2Theme {
-        Greeting("Android")
-    }
-}
