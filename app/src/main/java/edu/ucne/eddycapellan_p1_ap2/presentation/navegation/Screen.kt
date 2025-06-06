@@ -1,4 +1,4 @@
-package edu.ucne.eddycapellan_p1_ap2.data.local.navegation
+package edu.ucne.eddycapellan_p1_ap2.presentation.navegation
 
 import kotlinx.serialization.Serializable
 
